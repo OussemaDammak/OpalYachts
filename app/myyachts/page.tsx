@@ -1,4 +1,3 @@
-import Image from "next/image";
 import PropertyList from "../components/properties/propertyList";
 const MyYachtsPage =() =>{
 return(
