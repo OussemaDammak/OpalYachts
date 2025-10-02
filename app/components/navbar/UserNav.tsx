@@ -3,7 +3,16 @@ import { useState } from "react";
 import MenuLink from "./MenuLink";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useSignupModal from "@/app/hooks/useSignupModal";
-const UserNav = () => {
+import LogoutButton from "../LogoutButton";
+
+interface userNavProps {
+    userId?: string | null;
+}
+
+
+const UserNav: React.FC<userNavProps> = ({
+    userId
+    }) => {
     const loginModal=useLoginModal();
     const signupModal=useSignupModal();
     const [isOpen, setIsOpen]=useState(false)
@@ -26,6 +35,11 @@ return (
 
     {isOpen && (
         <div className="w-[220px] absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
+            
+            {userId ? (
+                <LogoutButton/>
+            ): (
+            <>
             <MenuLink
             label="Login"
             onClick={
@@ -44,6 +58,12 @@ return (
                 }}
             
             />
+            </>
+            )
+        
+            }
+
+            
         </div>
     )}
 </div>
