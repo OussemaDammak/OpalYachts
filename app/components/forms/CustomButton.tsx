@@ -14,7 +14,7 @@ return(
 
     <div 
         onClick={onClick}
-        className={` ${className} py-4 text-center bg-opalyachts hover:bg-opalyachts-dark text-white rounded-xl transition cursor-pointer`}
+        className={` py-4 text-center bg-opalyachts hover:bg-opalyachts-dark text-white rounded-xl transition cursor-pointer ${className}`}
         >    
         {label}
     </div>
