@@ -1,7 +1,16 @@
 import Image from "next/image";
 import ReservationSideBar from "@/app/components/properties/ReservationSideBar";
 
-const PropertyDetailPage =() =>{
+import apiService from "@/app/services/apiService";
+
+
+
+const PropertyDetailPage = async ({params}:{params:Promise<{id:string}>}) =>{
+    const {id} = await params;
+    const property = await apiService.get(`/api/properties/${id}`)
+    
+
+
 return(
     <main className="max-w-[1500px] mx-auto px-6 pb-6">
         <div className="w-full h-[64vh] mb-4 overflow-hidden rounded-2l relative">
@@ -15,30 +24,34 @@ return(
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div className="py-6 pr-6 col-span-3">
-                <h1 className="mb-4 text-4xl">Yacht Name</h1>
+                <h1 className="mb-4 text-4xl">{property.title}</h1>
                 <span className="mb-6 block text-lg text-gray-600">
-                    10 guests - 3 Cabins - 2 Bathrooms
+                    {property.guests} guests - {property.cabins} Cabins - {property.bathrooms} Bathrooms - {property.country}
                 </span>
                 <hr/>
                 <div className="py-6 flex items-center space-x-4">
+                    {property.host.avatar_url && (
                     <Image
-                        src="/RichFrog1.jpg"
+                        src={property.host.avatar_url}
                         alt="Rich Frog"
                         width={70}
                         height={70}
                         className="rounded-full"
                     />
-                    <p><strong>Rich Frog</strong> is your host</p>
+                    )}
+                    <p><strong>{property.host.name}</strong> is your host</p>
                 </div>
                 <hr/>
                 <p className="mt-6 text-lg">
-                    Luxury yacht with 3 cozy cabins and 2 bathrooms, accommodating up to 10 guests. Enjoy a spacious sun deck, fully equipped galley, and modern amenities for a comfortable stay on the water.
+                    {property.description}
                 </p>
 
 
             </div> 
 
-            <ReservationSideBar/>
+            <ReservationSideBar
+                property={property}
+            />
             
         </div>
 
