@@ -28,7 +28,7 @@ const SignupModal = () =>{
             password2:password2
         }
 
-        const response = await apiService.post('/api/auth/register/', JSON.stringify(formData));
+        const response = await apiService.postWithoutToken('/api/auth/register/', JSON.stringify(formData));
         if (response.access){
 
             // handleLogin , we need to store this info in a cookie and not in browser

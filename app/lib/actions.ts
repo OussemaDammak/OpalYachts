@@ -39,3 +39,10 @@ export async function getUserId(){
     const userId = (await cookies()).get('session_userid')?.value
     return userId ? userId : null
 }
+
+export async function getAccessToken(){
+    let accessToken = (await cookies()).get('session_acces_token')?.value;
+
+    // i need also to refresh token if it's not there
+    return accessToken
+}
