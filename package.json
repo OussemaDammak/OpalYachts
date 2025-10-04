@@ -10,6 +10,7 @@
   "dependencies": {
     "next": "15.5.4",
     "react": "19.1.0",
+    "react-date-range": "^2.0.1",
     "react-dom": "19.1.0",
     "react-select": "^5.10.2",
     "world-countries": "^5.1.0",
@@ -19,6 +20,7 @@
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
+    "@types/react-date-range": "^1.4.10",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
     "typescript": "^5"
