@@ -45,6 +45,9 @@ const ReservationSideBar:React.FC<ReservationSideBarProps> =({
     //max guests allowed
     const guestsRange = Array.from({length: property.guests},(_, index)=> index+1);
     
+    //for making booking days gray (unavailable)
+    const [BookedDates,setBookedDates] = useState<Date[]>([]);
+
     //for submit the booking
     const performBooking= async ()=>{
         if (userId){
@@ -88,8 +91,27 @@ const ReservationSideBar:React.FC<ReservationSideBarProps> =({
 
     }
 
+
+    const getReservations = async () => {
+        const reservations = await apiService.get(`/api/properties/${property.id}/reservations/`)
+
+        let dates: Date[]= [];
+
+        reservations.forEach((reservation:any)=>{
+            const range = eachDayOfInterval({
+                start: new Date(reservation.start_date),
+                end: new Date(reservation.end_date),
+            });
+
+            dates= [...dates, ...range];
+        })
+
+        setBookedDates(dates);
+    }
+
     //this runs on every guests or day change
     useEffect(()=>{
+        getReservations();
         if (dateRange.startDate && dateRange.endDate){
             const dayCount = differenceInDays (
                 dateRange.endDate,
@@ -119,7 +141,7 @@ const ReservationSideBar:React.FC<ReservationSideBarProps> =({
             <DatePicker
                 value={dateRange}
                 onChange={(value)=> _setDateRange(value.selection)}
-                
+                bookedDates={BookedDates}
             />
             
             
