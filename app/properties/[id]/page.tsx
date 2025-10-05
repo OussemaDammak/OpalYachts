@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ReservationSideBar from "@/app/components/properties/ReservationSideBar";
-
+import Link from "next/link";
 import apiService from "@/app/services/apiService";
 import { getUserId } from "@/app/lib/actions";
 
@@ -31,7 +31,9 @@ return(
                     {property.guests} guests - {property.cabins} Cabins - {property.bathrooms} Bathrooms - {property.country}
                 </span>
                 <hr/>
-                <div className="py-6 flex items-center space-x-4">
+                <Link 
+                    href={`/landlords/${property.host.id}`}
+                    className="py-6 flex items-center space-x-4">
                     {property.host.avatar_url && (
                     <Image
                         src={property.host.avatar_url}
@@ -42,7 +44,7 @@ return(
                     />
                     )}
                     <p><strong>{property.host.name}</strong> is your host</p>
-                </div>
+                </Link>
                 <hr/>
                 <p className="mt-6 text-lg">
                     {property.description}
