@@ -17,7 +17,7 @@ return(
     <main className="max-w-[1500px] mx-auto px-6 pb-6">
         <div className="w-full h-[64vh] mb-4 overflow-hidden rounded-2l relative">
             <Image
-                src="/GigaY1.jpg"
+                src={property.image_url}
                 className="object-cover w-full h-full"
                 fill
                 alt="giga y1"

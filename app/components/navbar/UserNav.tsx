@@ -47,7 +47,14 @@ return (
                         router.push('/myyachts/');
                         }}
                 />        
-
+                <MenuLink 
+                    label='My Reservations'
+                    onClick={
+                        ()=>{
+                        setIsOpen(false);
+                        router.push('/myreservations/');
+                        }}
+                />       
 
                 <LogoutButton/>
 
