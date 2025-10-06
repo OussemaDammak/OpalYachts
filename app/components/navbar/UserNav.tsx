@@ -62,7 +62,15 @@ return (
                         setIsOpen(false);
                         router.push('/myfavorites/');
                         }}
-                />        
+                />   
+                <MenuLink 
+                    label='Inbox'
+                    onClick={
+                        ()=>{
+                        setIsOpen(false);
+                        router.push('/inbox/');
+                        }}
+                />      
 
                 <LogoutButton/>
 
