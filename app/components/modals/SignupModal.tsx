@@ -14,7 +14,7 @@ const SignupModal = () =>{
     const router=useRouter();
 
     const SignupModal=useSignupModal();
-
+    const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     
     const [password1, setPassword1] = useState('');
@@ -24,9 +24,11 @@ const SignupModal = () =>{
     //submit function
     const submitSignup= async ()=>{
         const formData = {
+            
             email:email,
             password1:password1,
-            password2:password2
+            password2:password2,
+            name:name
         }
 
         const response = await apiService.postWithoutToken('/api/auth/register/', JSON.stringify(formData));
@@ -53,6 +55,7 @@ const SignupModal = () =>{
             action={submitSignup}
             className="space-y-4"
         >
+            <input onChange={(e)=> setName(e.target.value)} placeholder="Name" type="text" className="w-full h-[54px] px-4 border border-gray-400 rounded-xl" />
 
             <input onChange={(e)=> setEmail(e.target.value)} placeholder="Email Adress" type="email" className="w-full h-[54px] px-4 border border-gray-400 rounded-xl" />
             <input onChange={(e)=> setPassword1(e.target.value)} placeholder="Password" type="password" className="w-full h-[54px] px-4 border border-gray-400 rounded-xl" />
