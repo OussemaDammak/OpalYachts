@@ -9,6 +9,7 @@ interface ConversationDetailProps {
     conversation:ConversationType;
     userId:string;
     token:string;
+    messages: MessageType[];
 }
 
 
@@ -16,6 +17,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     conversation,
     userId,
     token,
+    messages,
 })=>{
 
     const messagesDiv= useRef(null);
@@ -28,6 +30,8 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     //for receiving
     const [realtimeMessages, setRealtimeMessages]= useState<MessageType[]>([]);
     //
+    // for loading messages
+
 
 
     const {sendJsonMessage, lastJsonMessage, readyState}=useWebSocket(`ws://127.0.0.1:8000/ws/${conversation.id}/?token=${token}`, {
@@ -36,6 +40,8 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     })
 
 
+    // for loading messages
+    
     useEffect(()=>{
         console.log("connection state changed", readyState);
     }, [readyState]);
@@ -92,11 +98,21 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
             className="max-h-[400px] overflow-auto flex flex-col space-y-4"
             >
             
+            {messages.map((message, index)=> (
+                <div 
+                    key={index}
+                    className={`w-[80%] py-4 px-6 rounded-xl ${message.created_by.name == myUser?.name ?'ml-[20%] bg-blue-200' : 'bg-gray-200' }`}
+                    >
+                    <p className="font-bold text-gray-500">{message.created_by.name}</p>
+                    <p>{message.body}</p>
+
+                </div>
+            ))}
 
             {realtimeMessages.map((message, index)=> (
                 <div 
                     key={index}
-                    className={`w-[80%] py-4 px-6 rounded-xl ${message.name === myUser?.name ?'ml-[20%] bg-blue-200' : 'bg-gray-200' }`}
+                    className={`w-[80%] py-4 px-6 rounded-xl ${message.name == myUser?.name ?'ml-[20%] bg-blue-200' : 'bg-gray-200' }`}
                     >
                     <p className="font-bold text-gray-500">{message.name}</p>
                     <p>{message.body}</p>
