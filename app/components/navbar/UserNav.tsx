@@ -54,7 +54,15 @@ return (
                         setIsOpen(false);
                         router.push('/myreservations/');
                         }}
-                />       
+                />
+                <MenuLink 
+                    label='My Favorites'
+                    onClick={
+                        ()=>{
+                        setIsOpen(false);
+                        router.push('/myfavorites/');
+                        }}
+                />        
 
                 <LogoutButton/>
 
