@@ -1,6 +1,6 @@
 'use client';
 import Modal from "./Modal";
-import useSearchModal from "@/app/hooks/useSearchModal";
+import useSearchModal, { SearchQuery } from "@/app/hooks/useSearchModal";
 import SelectCountry, {SelectCountryValue} from "../forms/SelectCountry";
 import { useState } from "react";
 import CustomButton from "../forms/CustomButton";
@@ -31,6 +31,18 @@ const SearchModal = () =>{
     const [numBathrooms, setNumBathrooms] = useState<string>('0');
 
     const closeAndSearch =()=>{
+
+        const newSearchQuery: SearchQuery= {
+            country:country?.label,
+            checkIn: dateRange.startDate,
+            checkOut: dateRange.endDate,
+            guests:parseInt(numGuests),
+            cabins:parseInt(numCabins),
+            bathrooms:parseInt(numBathrooms),
+            category:''
+        }
+
+        searchModal.setQuery(newSearchQuery);
         searchModal.close();
     }
 
@@ -131,7 +143,7 @@ const SearchModal = () =>{
 
             <div className="space-y-4">
                 <label>Number of Cabins : </label>
-                <input type="number" min="1" value={numCabins} onChange={(e) => setNumGuests(e.target.value)} 
+                <input type="number" value={numCabins} onChange={(e) => setNumCabins(e.target.value)} 
                        className="w-full h-14 px-4 border border-gray-500 rounded-xl" placeholder="Number of Cabins"
                 />
 
@@ -139,7 +151,7 @@ const SearchModal = () =>{
 
             <div className="space-y-4">
                 <label>Number of bathrooms : </label>
-                <input type="number" min="1" value={numBathrooms} onChange={(e) => setNumGuests(e.target.value)} 
+                <input type="number" value={numBathrooms} onChange={(e) => setNumBathrooms(e.target.value)} 
                        className="w-full h-14 px-4 border border-gray-500 rounded-xl" placeholder="Number of bathrooms"
                 />
 

@@ -3,9 +3,9 @@ import {create} from "zustand";
 
 
 export type SearchQuery = {
-    country:string;
-    checkIn: Date | null; 
-    checkout: Date | null;
+    country:string | undefined;
+    checkIn: Date | undefined; 
+    checkOut: Date | undefined;
     guests: Number;
     bathrooms:Number;
     cabins:Number;
@@ -31,8 +31,8 @@ const useSearchModal = create<SearchmodalStore>((set)=> ({
     close:()=> set({isOpen:false}),
     query:{
         country:'',
-        checkIn:null,
-        checkout:null,
+        checkIn:undefined,
+        checkOut:undefined,
         guests:1,
         cabins:0,
         bathrooms:0,
