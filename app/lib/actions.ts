@@ -2,6 +2,46 @@
 
 import { cookies } from "next/headers";
 
+//refresh token
+export async function handleRefresh() {
+    console.log('refresh hh');
+
+    try {
+        const refreshToken = await getRefreshToken();
+
+        const response = await fetch('http://localhost:8000/api/auth/token/refresh/', {
+            method: 'POST',
+            body: JSON.stringify({ refresh: refreshToken }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const json = await response.json();
+        console.log('Response- Refresh:', json);
+
+        if (json.access) {
+            const cookieStore = await cookies(); // synchronous
+            cookieStore.set('session_access_token', json.access, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 60 * 60, // 60 minutes
+                path: '/'
+            });
+            return json.access;
+        } else {
+            resetAuthCookies();
+            return null;
+        }
+
+    } catch (error) {
+        console.log('error', error);
+        resetAuthCookies();
+        return null;
+    }
+}
+
 export async function handleLogin(userId:string, accessToken:string, refreshToken:string){
     
     
@@ -43,6 +83,15 @@ export async function getUserId(){
 export async function getAccessToken(){
     let accessToken = (await cookies()).get('session_acces_token')?.value;
 
+    if (!accessToken){
+        accessToken= await handleRefresh();
+    }
+
     // i need also to refresh token if it's not there
     return accessToken
+}
+
+export async function getRefreshToken(){
+    const refreshToken = (await cookies()).get('session_refresh_token')?.value
+    return refreshToken
 }
