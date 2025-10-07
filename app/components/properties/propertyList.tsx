@@ -78,22 +78,22 @@ const PropertyList: React.FC<PropertyListProps> = ({
                 urlQuery+='&country='+country
             }
             if (numGuests){
-                urlQuery+='&numGuests'+numGuests
+                urlQuery+='&numGuests='+numGuests
             }
             if (numCabins){
-                urlQuery+='&numCabins'+numCabins
+                urlQuery+='&numCabins='+numCabins
             }
             if (numBathrooms){
-                urlQuery+='&numBathrooms'+numBathrooms
+                urlQuery+='&numBathrooms='+numBathrooms
             }
             if (category){
-                urlQuery+='&category'+category
+                urlQuery+='&category='+category
             }
             if (checkInDate){
-                urlQuery+='&checkin'+format(checkInDate,'yyyy-MM-dd')
+                urlQuery+='&checkin='+format(checkInDate,'yyyy-MM-dd')
             }
             if (checkOutDate){
-                urlQuery+='&checkout'+format(checkOutDate,'yyyy-MM-dd')
+                urlQuery+='&checkout='+format(checkOutDate,'yyyy-MM-dd')
             }
 
             if (urlQuery.length){
