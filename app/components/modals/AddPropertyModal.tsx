@@ -72,7 +72,9 @@ const AddPropertyModal =() => {
             const response = await apiService.post('/api/properties/create/', formData);
             if (response.success){
                 console.log('SUCCESS');
-                router.push('/')
+                //doesn't matter what u fill up here, as long as url changes
+                router.push('/?added=true');
+                //
                 addPropertyModal.close();
             } else {
                 console.log('Error')

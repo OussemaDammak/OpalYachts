@@ -9,6 +9,10 @@ import apiService from "@/app/services/apiService";
 import useSearchModal from "@/app/hooks/useSearchModal";
 import {format} from "date-fns";
 
+// refresh front automatically
+import { useSearchParams } from "next/navigation";
+//
+
 export type PropertyType ={
     id:string;
     title:string;
@@ -28,6 +32,8 @@ const PropertyList: React.FC<PropertyListProps> = ({
     favorites
 
 }) => {
+
+    const params = useSearchParams();
 
     const searchModal = useSearchModal();
 
@@ -118,7 +124,7 @@ const PropertyList: React.FC<PropertyListProps> = ({
 
     useEffect(()=>{
         getProperties();
-    },[category, searchModal.query])
+    },[category, searchModal.query, params])
     return(
         <>
         {properties.map((property)=>{
