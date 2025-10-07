@@ -19,9 +19,22 @@ const SearchModal = () =>{
     let content = (<></>);
     const searchModal = useSearchModal();
 
+    
+
     const [country, setCountry]= useState<SelectCountryValue>();
 
     const [dateRange, setDateRange]= useState<Range>(initialDateRange);
+
+    //for search details
+    const [numGuests, setNumGuests] = useState<string>('1');
+    const [numCabins, setNumCabins] = useState<string>('0');
+    const [numBathrooms, setNumBathrooms] = useState<string>('0');
+
+    const closeAndSearch =()=>{
+        searchModal.close();
+    }
+
+
 
     //set date range
     const _setDateRange = (selection:Range)=> {
@@ -104,6 +117,52 @@ const SearchModal = () =>{
 
     )
 
+     const contentDetails = (
+        <>
+            <h2 className="mb-6 text-2xl">Details</h2>
+            
+            <div className="space-y-4">
+                <label>Number of guests : </label>
+                <input type="number" min="1" value={numGuests} onChange={(e) => setNumGuests(e.target.value)} 
+                       className="w-full h-14 px-4 border border-gray-500 rounded-xl" placeholder="Number of guests"
+                />
+
+            </div>
+
+            <div className="space-y-4">
+                <label>Number of Cabins : </label>
+                <input type="number" min="1" value={numCabins} onChange={(e) => setNumGuests(e.target.value)} 
+                       className="w-full h-14 px-4 border border-gray-500 rounded-xl" placeholder="Number of Cabins"
+                />
+
+            </div>
+
+            <div className="space-y-4">
+                <label>Number of bathrooms : </label>
+                <input type="number" min="1" value={numBathrooms} onChange={(e) => setNumGuests(e.target.value)} 
+                       className="w-full h-14 px-4 border border-gray-500 rounded-xl" placeholder="Number of bathrooms"
+                />
+
+            </div>
+
+            
+
+
+            <div className="mt-6 flex flex-row gap-4">
+                <CustomButton
+                    label="<- Check out date"
+                    onClick={()=>searchModal.open('checkout')}
+                />
+                <CustomButton
+                    label="Search"
+                    onClick={closeAndSearch}
+                />
+            </div>
+
+        </>
+
+    )
+
 
     if (searchModal.step == 'location'){
         content=contentLocation;
@@ -111,6 +170,8 @@ const SearchModal = () =>{
         content=contentCheckin
     }else if (searchModal.step=='checkout') {
         content=contentCheckout
+    }else if (searchModal.step=='details'){
+        content=contentDetails
     }
 
 
