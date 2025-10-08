@@ -9,7 +9,17 @@ const nextConfig: NextConfig = {
         hostname:'localhost',
         port: '8000',
         pathname: '/**',
-      }
+      },
+        {
+        protocol: 'https',
+        hostname: 'opalyachts-backend.onrender.com',
+        pathname: '/**',
+      },
+       {
+      protocol: 'https',
+      hostname: 'res.cloudinary.com',
+      pathname: '/**',
+    },
     ]
   }
 };

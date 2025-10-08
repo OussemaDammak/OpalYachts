@@ -9,7 +9,7 @@ export async function handleRefresh() {
     try {
         const refreshToken = await getRefreshToken();
 
-        const response = await fetch('http://localhost:8000/api/auth/token/refresh/', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/token/refresh/`, {
             method: 'POST',
             body: JSON.stringify({ refresh: refreshToken }),
             headers: {
