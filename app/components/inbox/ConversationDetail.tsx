@@ -34,7 +34,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
 
 
 
-    const {sendJsonMessage, lastJsonMessage, readyState}=useWebSocket(`ws://127.0.0.1:8000/ws/${conversation.id}/?token=${token}`, {
+    const {sendJsonMessage, lastJsonMessage, readyState}=useWebSocket(`${process.env.NEXT_PUBLIC_WS_URL}/ws/${conversation.id}/?token=${token}`, {
         share:false,
         shouldReconnect: ()=>true,
     })
