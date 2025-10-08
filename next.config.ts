@@ -10,13 +10,8 @@ const nextConfig: NextConfig = {
         port: '8000',
         pathname: '/**',
       },
-        {
-        protocol: 'https',
-        hostname: 'opalyachts-backend.onrender.com',
-        pathname: '/**',
-      },
        {
-      protocol: 'https',
+      protocol: 'http',
       hostname: 'res.cloudinary.com',
       pathname: '/**',
     },
