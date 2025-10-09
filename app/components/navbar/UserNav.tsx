@@ -72,7 +72,9 @@ return (
                         }}
                 />      
 
-                <LogoutButton/>
+                <LogoutButton
+                    onLogout={() => setIsOpen(false)}
+                    />
 
                 </>
             ): (

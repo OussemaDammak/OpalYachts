@@ -5,7 +5,6 @@ import { UserType } from "../page";
 
 export type MessageType ={
     id:string;
-    name:string;
     username:string;
     body:string;
     conversationId: string;

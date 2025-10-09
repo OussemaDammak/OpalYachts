@@ -31,6 +31,7 @@ const LoginModal = () =>{
 
 
             LoginModal.close();
+            router.refresh();
             router.push('/')
         } else{
             setErrors(response.non_field_errors);
