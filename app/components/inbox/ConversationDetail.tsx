@@ -48,10 +48,10 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
 
     //for appending messages 
     useEffect(()=>{
-        if (lastJsonMessage && typeof lastJsonMessage === 'object' && 'name' in lastJsonMessage && 'body' in lastJsonMessage){
+        if (lastJsonMessage && typeof lastJsonMessage === 'object' && 'username' in lastJsonMessage && 'body' in lastJsonMessage){
             const message: MessageType={
                 id:'',
-                name:lastJsonMessage.name as string,
+                username:lastJsonMessage.username as string,
                 body:lastJsonMessage.body as string,
                 conversationId:conversation.id,
                 sent_to: otherUser as UserType,
@@ -71,7 +71,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
             event:'chat_message',
             data:{
                 body:newMessage,
-                name:myUser?.name,
+                username:myUser?.username,
                 sent_to_id: otherUser?.id,
                 conversation_id:conversation.id
             }
@@ -101,9 +101,9 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
             {messages.map((message, index)=> (
                 <div 
                     key={index}
-                    className={`w-[80%] py-4 px-6 rounded-xl ${message.created_by.name == myUser?.name ?'ml-[20%] bg-blue-200' : 'bg-gray-200' }`}
+                    className={`w-[80%] py-4 px-6 rounded-xl ${message.created_by.username == myUser?.username ?'ml-[20%] bg-blue-200' : 'bg-gray-200' }`}
                     >
-                    <p className="font-bold text-gray-500">{message.created_by.name}</p>
+                    <p className="font-bold text-gray-500">{message.created_by.username}</p>
                     <p>{message.body}</p>
 
                 </div>
@@ -112,9 +112,9 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
             {realtimeMessages.map((message, index)=> (
                 <div 
                     key={index}
-                    className={`w-[80%] py-4 px-6 rounded-xl ${message.name == myUser?.name ?'ml-[20%] bg-blue-200' : 'bg-gray-200' }`}
+                    className={`w-[80%] py-4 px-6 rounded-xl ${message.username == myUser?.username ?'ml-[20%] bg-blue-200' : 'bg-gray-200' }`}
                     >
-                    <p className="font-bold text-gray-500">{message.name}</p>
+                    <p className="font-bold text-gray-500">{message.username}</p>
                     <p>{message.body}</p>
 
                 </div>
