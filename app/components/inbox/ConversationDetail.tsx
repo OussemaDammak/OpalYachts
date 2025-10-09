@@ -20,7 +20,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     messages,
 })=>{
 
-    const messagesDiv= useRef(null);
+    const messagesDiv= useRef<HTMLDivElement>(null);
 
     const [newMessage,setNewMessage] = useState('');
 
