@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 import PropertyListItem from "./propertyListItem";
 
@@ -27,7 +27,8 @@ interface PropertyListProps{
     favorites?: boolean | null;
 }
 
-const PropertyList: React.FC<PropertyListProps> = ({
+// Internal component that uses useSearchParams
+const PropertyListContent: React.FC<PropertyListProps> = ({
     landlord_id,
     favorites
 
@@ -125,6 +126,7 @@ const PropertyList: React.FC<PropertyListProps> = ({
     useEffect(()=>{
         getProperties();
     },[category, searchModal.query, params])
+    
     return(
         <>
         {properties.map((property)=>{
@@ -135,10 +137,18 @@ const PropertyList: React.FC<PropertyListProps> = ({
                     markFavorite={(is_favorite:any)=>markFavorite(property.id, is_favorite)}
                 />
             )
-        })}
-        
-        
+        })};
         </>
     )
 }
+
+// Wrapper component with Suspense boundary
+const PropertyList: React.FC<PropertyListProps> = (props) => {
+    return (
+        <Suspense fallback={<div>Loading properties...</div>}>
+            <PropertyListContent {...props} />
+        </Suspense>
+    )
+}
+
 export default PropertyList;
