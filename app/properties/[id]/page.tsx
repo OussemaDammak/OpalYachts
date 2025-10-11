@@ -43,7 +43,7 @@ return(
                         className="rounded-full"
                     />
                     )}
-                    <p><strong>{property.host.name}</strong> is your host</p>
+                    <p><strong>{property.host.username}</strong> is your host</p>
                 </Link>
                 <hr/>
                 <p className="mt-6 text-lg">
