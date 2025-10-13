@@ -7,6 +7,7 @@ import LoginModal from "./components/modals/LoginModal";
 import SignupModal from "./components/modals/SignupModal";
 import AddPropertyModal from "./components/modals/AddPropertyModal";
 import SearchModal from "./components/modals/SearchModal";
+import { Analytics } from "@vercel/analytics/next"
 
 
 const geistSans = Geist({
@@ -41,6 +42,7 @@ export default function RootLayout({
         <Navbar/>
         <div className="pt-28">
         {children}
+        <Analytics />
 </div>
   
   {/*
