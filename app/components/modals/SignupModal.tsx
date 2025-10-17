@@ -41,8 +41,11 @@ const SignupModal = () =>{
 
 
             SignupModal.close();
-            router.refresh();
-            window.location.href = '/';
+            
+            setTimeout(() => {
+                router.refresh();
+                window.location.href = '/';
+                }, 1000);
         } else{
             const tmpErrors: string[] = Object.values(response).map((error:any)=>{
                 return error;
