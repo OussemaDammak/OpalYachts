@@ -45,7 +45,7 @@ const SignupModal = () =>{
             setTimeout(() => {
                 router.refresh();
                 window.location.href = '/';
-                }, 400);
+                }, 200);
         } else{
             const tmpErrors: string[] = Object.values(response).map((error:any)=>{
                 return error;
