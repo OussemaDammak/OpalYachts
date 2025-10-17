@@ -42,7 +42,7 @@ const SignupModal = () =>{
 
             SignupModal.close();
             router.refresh();
-            router.push('/')
+            window.location.href = '/';
         } else{
             const tmpErrors: string[] = Object.values(response).map((error:any)=>{
                 return error;
